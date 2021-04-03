@@ -32,7 +32,7 @@ kafka的设计原理决定,对于一个topic，同一个group中不能有多于p
 
 kafka只能保证一个partition中的消息被某个consumer消费时是顺序的；事实上，从Topic角度来说,当有多个partitions时,消息仍不是全局有序的。
 
-
+&nbsp;
 
 ### ***\*3.\****kafka中生产数据的时候，如何保证写入的容错性？
 
@@ -46,7 +46,7 @@ kafka只能保证一个partition中的消息被某个consumer消费时是顺序�
 
 request.required.acks=0
 
-
+&nbsp;
 
 ### 4.如何保证kafka消费者消费数据是全局有序的
 
@@ -60,39 +60,39 @@ request.required.acks=0
 
 只有一个可能，就是一个生产者，一个partition，一个消费者。这种场景和大数据应用场景相悖。
 
-
+&nbsp;
 
 ### 5.有两个数据源，一个记录的是广告投放给用户的日志，一个记录用户访问日志，另外还有一个固定的用户基础表记录用户基本信息（比如学历，年龄等等）。现在要分析广告投放对与哪类用户更有效，请采用熟悉的技术描述解决思路。另外如果两个数据源都是实时数据源（比如来自kafka），他们数据在时间上相差5分钟，需要哪些调整来解决实时分析问题？
 
-
+&nbsp;
 
 ### 6.Kafka和SparkStreaing如何集成?
 
-
+&nbsp;
 
 ### 7.列举Kafka的优点，简述Kafka为什么可以做到每秒数十万甚至上百万消息的高效分发？
 
-
+&nbsp;
 
 ### 8.为什么离线分析要用kafka？
 
 Kafka的作用是解耦，如果直接从日志服务器上采集的话，实时离线都要采集，等于要采集两份数据，而使用了kafka的话，只需要从日志服务器上采集一份数据，然后在kafka中使用不同的两个组读取就行了
 
-##  
+&nbsp;
 
 ### 9.Kafka怎么进行监控?
 
 Kafka Manager
 
-
+&nbsp;
 
 ### 10.Kafka与传统的消息队列服务有很么不同
 
-
+&nbsp;
 
 ### 11.Kafka api  low-level与high-level有什么区别，使用low-level需要处理哪些细节
 
-
+&nbsp;
 
 ### 12.Kafka的ISR副本同步队列
 
@@ -104,7 +104,7 @@ ISR（In-Sync Replicas），副本同步队列。ISR中包括Leader和Follower�
 
 ### 13.Kafka消息数据积压，Kafka消费能力不足怎么处理？
 
-1）如果是Kafka消费能力不足，则可以考虑增加Topic的分区数，并且同时提升消费组的消费者数量，消费者数=分区数。（两者缺一不可）
+1）如果是Kafka消费能力不足，则可以考虑增加 Topic 的分区数，并且同时提升消费组的 `Consumer` 数量，消费者数=分区数。（两者缺一不可）
 
 2）如果是下游的数据处理不及时：提高每批次拉取的数量。批次拉取数据过少（拉取数据/处理时间<生产速度），使处理的数据小于生产的数据，也会造成数据积压。
 
@@ -156,23 +156,23 @@ bin/kafka-topics.sh --zookeeper localhost:2181/kafka --alter --topic topic-confi
 
 
 
-### 20.Kafka有内部的topic吗？如果有是什么？有什么所用？
+### 20. Kafka有内部的topic吗？如果有是什么？有什么所用？
 
  __consumer_offsets,保存消费者offset
 
+&nbsp;
 
-
-### 21.聊一聊Kafka Controller的作用？
+### 21. 聊一聊 Kafka Controller 的作用？
 
 负责管理集群broker的上下线，所有topic的分区副本分配和leader选举等工作。
 
-
+&nbsp;
 
 ### 22.失效副本是指什么？有那些应对措施？
 
 不能及时与leader同步，暂时踢出ISR，等其追上leader之后再重新加入
 
-
+&nbsp;
 
 ### 23.Kafka 都有哪些特点？
 
@@ -181,7 +181,8 @@ bin/kafka-topics.sh --zookeeper localhost:2181/kafka --alter --topic topic-confi
 - 持久性、可靠性：消息被持久化到本地磁盘，并且支持数据备份防止数据丢失
 - 容错性：允许集群中节点失败（若副本数量为n,则允许n-1个节点失败）
 - 高并发：支持数千个客户端同时读写
-- 
+
+&nbsp;
 
 ### 24.请简述下你在哪些场景下会选择 Kafka？
 
@@ -190,7 +191,8 @@ bin/kafka-topics.sh --zookeeper localhost:2181/kafka --alter --topic topic-confi
 - 用户活动跟踪：Kafka经常被用来记录web用户或者app用户的各种活动，如浏览网页、搜索、点击等活动，这些活动信息被各个服务器发布到kafka的topic中，然后订阅者通过订阅这些topic来做实时的监控分析，或者装载到hadoop、数据仓库中做离线分析和挖掘。
 - 运营指标：Kafka也经常用来记录运营监控数据。包括收集各种分布式应用的数据，生产各种操作的集中反馈，比如报警和报告。
 - 流式处理：比如spark streaming和 Flink
-- 
+
+&nbsp;
 
 ### 25.Kafka 的设计架构你知道吗？
 
@@ -211,19 +213,20 @@ Kafka 架构分为以下几个部分
 - Broker ：一台 kafka 服务器就是一个 broker。一个集群由多个 broker 组成。一个 broker 可以容纳多个 topic。
 - Partition：为了实现扩展性，一个非常大的 topic 可以分布到多个 broker上，每个 partition 是一个有序的队列。partition 中的每条消息都会被分配一个有序的id（offset）。将消息发给 consumer，kafka 只保证按一个 partition 中的消息的顺序，不保证一个 topic 的整体（多个 partition 间）的顺序。
 - Offset：kafka 的存储文件都是按照 offset.kafka 来命名，用 offset 做名字的好处是方便查找。例如你想找位于 2049 的位置，只要找到 2048.kafka 的文件即可。当然 the first offset 就是 00000000000.kafka。
-- 
+
+&nbsp;
 
 ### 26.Kafka 分区的目的？
 
 分区对于 Kafka 集群的好处是：实现负载均衡。分区对于消费者来说，可以提高并发度，提高效率。
 
-
+&nbsp;
 
 ### 27.你知道 Kafka 是如何做到消息的有序性？
 
 kafka 中的每个 partition 中的消息在写入时都是有序的，而且消息带有offset偏移量，消费者按偏移量的顺序从前往后消费，从而保证了消息的顺序性。但是分区之间的消息是不保证有序的。
 
-
+&nbsp;
 
 ### 28.Kafka 的高可靠性是怎么实现的？
 
@@ -232,6 +235,8 @@ kafka通过分区的多副本机制来保证消息的可靠性。1. 每个分区
 更具体来说，可参看下文：
 
 Kafka 的分区多副本架构是 Kafka 可靠性保证的核心，把消息写入多个副本可以使 Kafka 在发生崩溃时仍能保证消息的持久性。
+
+&nbsp;
 
 #### Producer 往 Broker 发送消息
 
@@ -281,7 +286,7 @@ AR：Assigned Replicas 所有副本
 
 ISR是由leader维护，follower从leader同步数据有一些延迟（具体可以参见 图文了解 Kafka 的副本复制机制），超过相应的阈值会把 follower 剔除出 ISR, 存入OSR（Out-of-Sync Replicas ）列表，新加入的follower也会先存放在OSR中。AR=ISR+OSR。
 
-
+&nbsp;
 
 ### 31.LEO、HW、LSO、LW等分别代表什么
 
@@ -289,19 +294,20 @@ ISR是由leader维护，follower从leader同步数据有一些延迟（具体可
 - HW：水位或水印（watermark）一词，也可称为高水位(high watermark)，通常被用在流式处理领域（比如Apache Flink、Apache Spark等），以表征元素或事件在基于时间层面上的进度。在Kafka中，水位的概念反而与时间无关，而是与位置信息相关。严格来说，它表示的就是位置信息，即位移（offset）。取 partition 对应的 ISR中 最小的 LEO 作为 HW，consumer 最多只能消费到 HW 所在的位置上一条信息。
 - LSO：是 LastStableOffset 的简称，对未完成的事务而言，LSO 的值等于事务中第一条消息的位置(firstUnstableOffset)，对已完成的事务而言，它的值同 HW 相同
 - LW：Low Watermark 低水位, 代表 AR 集合中最小的 logStartOffset 值。
-- 
+
+&nbsp;
 
 ### 32.Kafka 在什么情况下会出现消息丢失？
 
 参考数据可靠性和数据一致性
 
-
+&nbsp;
 
 ### 33.怎么尽可能保证 Kafka 的可靠性
 
 参考数据可靠性和数据一致性
 
-
+&nbsp;
 
 ### 34.消费者和消费者组有什么关系？
 
@@ -309,7 +315,7 @@ ISR是由leader维护，follower从leader同步数据有一些延迟（具体可
 
 ![img](https://obs-emcsapp-public.obs.cn-north-4.myhwclouds.com/wechatSpider/modb_b981969e-006b-11eb-a419-5254001c05fe.png)
 
-
+&nbsp;
 
 ### 35.Kafka 的每个分区只能被一个消费者线程，如何做到多个线程同时消费一个分区？
 
@@ -322,21 +328,26 @@ ISR是由leader维护，follower从leader同步数据有一些延迟（具体可
 - 最多一次: 消息不会被重复发送，最多被传输一次，但也有可能一次不传输
 - 最少一次: 消息不会被漏发送，最少被传输一次，但也有可能被重复传输.
 - 精确的一次（Exactly once）: 不会漏传输也不会重复传输,每个消息都传输被
-- 
+
+&nbsp;
 
 ### 37.Kafka 消费者是否可以消费指定分区消息？
 
-Kafa consumer消费消息时，向broker发出fetch请求去消费特定分区的消息，consumer指定消息在日志中的偏移量（offset），就可以消费从这个位置开始的消息，customer拥有了offset的控制权，可以向后回滚去重新消费之前的消息，这是很有意义的
+Kafa consumer 消费消息时，向 broker 发出 fetch 请求去消费特定分区的消息，consumer 指定消息在日志中的偏移量（offset），就可以消费从这个位置开始的消息，customer 拥有了 offset 的控制权，可以向后回滚去重新消费之前的消息，这是很有意义的
 
-
+&nbsp;
 
 ### 38.Kafka消息是采用Pull模式，还是Push模式？
 
-Kafka最初考虑的问题是，customer应该从brokes拉取消息还是brokers将消息推送到consumer，也就是pull还push。在这方面，Kafka遵循了一种大部分消息系统共同的传统的设计：producer将消息推送到broker，consumer从broker拉取消息。
+Kafka最初考虑的问题是，customer 应该从 brokes 拉取消息还是 brokers 将消息推送到 consumer，也就是 pull 还 push。在这方面，Kafka 遵循了一种大部分消息系统共同的传统的设计：producer 将消息推送到 broker，consumer 从 broker 拉取消息。
 
-一些消息系统比如Scribe和Apache Flume采用了push模式，将消息推送到下游的consumer。这样做有好处也有坏处：由broker决定消息推送的速率，对于不同消费速率的consumer就不太好处理了。消息系统都致力于让consumer以最大的速率最快速的消费消息，但不幸的是，push模式下，当broker推送的速率远大于consumer消费的速率时，consumer恐怕就要崩溃了。最终Kafka还是选取了传统的pull模式。Pull模式的另外一个好处是consumer可以自主决定是否批量的从broker拉取数据。Push模式必须在不知道下游consumer消费能力和消费策略的情况下决定是立即推送每条消息还是缓存之后批量推送。如果为了避免consumer崩溃而采用较低的推送速率，将可能导致一次只推送较少的消息而造成浪费。Pull模式下，consumer就可以根据自己的消费能力去决定这些策略。Pull有个缺点是，如果broker没有可供消费的消息，将导致consumer不断在循环中轮询，直到新消息到t达。为了避免这点，Kafka有个参数可以让consumer阻塞知道新消息到达(当然也可以阻塞知道消息的数量达到某个特定的量这样就可以批量发
+一些消息系统比如 Scribe 和 Apache Flume 采用了 push 模式，将消息推送到下游的 consumer。这样做有好处也有坏处：由 broker 决定消息推送的速率，对于不同消费速率的consumer就不太好处理了。消息系统都致力于让consumer以最大的速率最快速的消费消息，但不幸的是，push模式下，当 broker 推送的速率远大于 consumer 消费的速率时，consumer 恐怕就要崩溃了。最终 Kafka 还是选取了传统的 pull 模式。Pull 模式的另外一个好处是 consumer 可以自主决定是否批量的从 broker 拉取数据。
 
+Push 模式必须在不知道下游consumer 消费能力和消费策略的情况下决定是立即推送每条消息还是缓存之后批量推送。如果为了避免 consumer 崩溃而采用较低的推送速率，将可能导致一次只推送较少的消息而造成浪费。Pull 模式下，consumer 就可以根据自己的消费能力去决定这些策略。
 
+Pull 有个缺点是，如果 broker 没有可供消费的消息，将导致 consumer 不断在循环中轮询，直到新消息到达。为了避免这点，Kafka 有个参数可以让 consumer 阻塞知道新消息到达(当然也可以阻塞知道消息的数量达到某个特定的量这样就可以批量发
+
+&nbsp;
 
 ### 39.Kafka 消息格式的演变清楚吗？
 
@@ -372,13 +383,13 @@ Kafka 的消息格式经过了四次大变化，
 - value length：占用4个字节。主要标识 value 的内容的长度 V；
 - value：这个占用的字节为 V。value即是消息的真实内容，在 Kafka 中这个也叫做payload。
 
-
+&nbsp;
 
 ### 40.Kafka 偏移量的演变清楚吗？
 
 参见官方文档，此问题很少问
 
-
+&nbsp;
 
 ### 41.Kafka 高效文件存储设计特点
 
@@ -386,6 +397,8 @@ Kafka 的消息格式经过了四次大变化，
 - 通过索引信息可以快速定位message和确定response的最大大小。
 - 通过index元数据全部映射到memory，可以避免segment file的IO磁盘操作。
 - 通过索引文件稀疏存储，可以大幅降低index文件元数据占用空间大小
+
+&nbsp;
 
 ### 42.Kafka创建Topic时如何将分区放置到不同的Broker中
 
@@ -396,7 +409,7 @@ Kafka 的消息格式经过了四次大变化，
 
 具体可以参见Kafka创建Topic时如何将分区放置到不同的Broker中。
 
-
+&nbsp;
 
 ### 43.Kafka新建的分区会在哪个目录下创建
 
@@ -406,13 +419,15 @@ Kafka 的消息格式经过了四次大变化，
 
 但是如果 log.dirs 参数配置了多个目录，那么 Kafka 会在哪个文件夹中创建分区目录呢？答案是：Kafka 会在含有分区目录最少的文件夹中创建新的分区目录，分区目录名为 Topic名+分区ID。注意，是分区文件夹总数最少的目录，而不是磁盘使用量最少的目录！也就是说，如果你给 log.dirs 参数新增了一个新的磁盘，新的分区目录肯定是先在这个新的磁盘上创建直到这个新的磁盘目录拥有的分区目录不是最少为止。
 
-
+&nbsp;
 
 ### 44.谈一谈 Kafka 的再均衡
 
 在Kafka中，当有新消费者加入或者订阅的topic数发生变化时，会触发Rebalance(再均衡：在同一个消费者组当中，分区的所有权从一个消费者转移到另外一个消费者)机制，Rebalance顾名思义就是重新均衡消费者消费。Rebalance的过程如下：
 
 第一步：所有成员都向coordinator发送请求，请求入组。一旦所有成员都发送了请求，coordinator会从中选择一个consumer担任leader的角色，并把组成员信息以及订阅信息发给leader。第二步：leader开始分配消费方案，指明具体哪个consumer负责消费哪些topic的哪些partition。一旦完成分配，leader会将这个方案发给coordinator。coordinator接收到分配方案之后会把方案发给各个consumer，这样组内的所有成员就都知道自己应该消费哪些分区了。所以对于Rebalance来说，Coordinator起着至关重要的作用
+
+&nbsp;
 
 ### 45.谈谈 Kafka 分区分配策略
 
@@ -431,6 +446,8 @@ Kafka 的消息格式经过了四次大变化，
 
 将分区的所有权从一个消费者移到另一个消费者称为重新平衡（rebalance），如何rebalance就涉及到本文提到的分区分配策略。下面我们将详细介绍 Kafka 内置的两种分区分配策略。本文假设我们有个名为 T1 的主题，其包含了10个分区，然后我们有两个消费者（C1，C2）来消费这10个分区里面的数据，而且 C1 的 num.streams = 1，C2 的 num.streams = 2。
 
+&nbsp;
+
 #### Range strategy
 
 Range策略是对每个主题而言的，首先对同一个主题里面的分区按照序号进行排序，并对消费者按照字母顺序进行排序。在我们的例子里面，排完序的分区将会是0, 1, 2, 3, 4, 5, 6, 7, 8, 9；消费者线程排完序将会是C1-0, C2-0, C2-1。然后将partitions的个数除于消费者线程的总数来决定每个消费者线程消费几个分区。如果除不尽，那么前面几个消费者线程将会多消费一个分区。在我们的例子里面，我们有10个分区，3个消费者线程， 10 3 = 3，而且除不尽，那么消费者线程 C1-0 将会多消费一个分区，所以最后分区分配的结果看起来是这样的：
@@ -446,6 +463,8 @@ C1-0 将消费 0, 1, 2, 3 分区C2-0 将消费 4, 5, 6, 7 分区C2-1 将消费 8
 C1-0 将消费 T1主题的 0, 1, 2, 3 分区以及 T2主题的 0, 1, 2, 3分区C2-0 将消费 T1主题的 4, 5, 6 分区以及 T2主题的 4, 5, 6分区C2-1 将消费 T1主题的 7, 8, 9 分区以及 T2主题的 7, 8, 9分区
 
 可以看出，C1-0 消费者线程比其他消费者线程多消费了2个分区，这就是Range strategy的一个很明显的弊端。
+
+&nbsp;
 
 #### RoundRobin strategy
 
@@ -484,11 +503,11 @@ C1-0 将消费 T1-5, T1-2, T1-6 分区；C1-1 将消费 T1-3, T1-1, T1-9 分区�
 
 根据上面的详细介绍相信大家已经对Kafka的分区分配策略原理很清楚了。不过遗憾的是，目前我们还不能自定义分区分配策略，只能通过partition.assignment.strategy参数选择 range 或 roundrobin。partition.assignment.strategy参数默认的值是range。
 
-
+&nbsp;
 
 ### 46.Kafka Producer 是如何动态感知主题分区数变化的？
 
-
+&nbsp;
 
 ### 47.Kafka 是如何实现高吞吐率的？
 
@@ -499,6 +518,8 @@ Kafka是分布式消息系统，需要处理海量的消息，Kafka的设计是�
 - 文件分段
 - 批量发送
 - 数据压缩。
+
+&nbsp;
 
 ### 48.Kafka 监控都有哪些？
 
@@ -514,31 +535,31 @@ Kafka Eagle
 
 JMX协议（可以用诸如jdk自带的jconsole来进行连接获取状态信息）
 
-
+&nbsp;
 
 49.如何为Kafka集群选择合适的Topics/Partitions数量
 
 参见《如何为Kafka集群选择合适的Topics/Partitions数量》
 
-
+&nbsp;
 
 ### 50.谈谈你对 Kafka 事务的了解？
 
 参见这篇文章：http://www.jasongj.com/kafka/transaction/
 
-
+&nbsp;
 
 ### 51.谈谈你对 Kafka 幂等的了解？
 
 参见这篇文章：https://www.jianshu.com/p/b1599f46229b
 
-
+&nbsp;
 
 ### 52.Kafka 缺点？
 
 - 由于是批量发送，数据并非真正的实时；
 
-- 对于mqtt协议不支持；
+- 对于 mqtt 协议不支持；
 
 - 不支持物联网传感数据直接接入；
 
@@ -548,7 +569,7 @@ JMX协议（可以用诸如jdk自带的jconsole来进行连接获取状态信息
 
 - 依赖zookeeper进行元数据管理；
 
-  
+&nbsp;
 
 ### 53.Kafka 新旧消费者的区别
 
@@ -556,25 +577,25 @@ JMX协议（可以用诸如jdk自带的jconsole来进行连接获取状态信息
 
 现在的消费者同时支持以上两种行为，所以为啥还用旧消费者 API 呢？
 
-
+&nbsp;
 
 ### 54.Kafka 分区数可以增加或减少吗？为什么？
 
 我们可以使用 bin/kafka-topics.sh 命令对 Kafka 增加 Kafka 的分区数据，但是 Kafka 不支持减少分区数。Kafka 分区数据不支持减少是由很多原因的，比如减少的分区其数据放到哪里去？是删除，还是保留？删除的话，那么这些没消费的消息不就丢了。如果保留这些消息如何放到其他分区里面？追加到其他分区后面的话那么就破坏了 Kafka 单个分区的有序性。如果要保证删除分区数据插入到其他分区保证有序性，那么实现起来逻辑就会非常复杂。
 
+&nbsp;
 
-
- 55.kafka消息的存储机制
+##  55.kafka消息的存储机制
 
  kafka通过 topic来分主题存放数据，主题内有分区，分区可以有多个副本，分区的内部还细分为若干个 segment。都是持久化到磁盘，采用零拷贝技术。
 
-
+&nbsp;
 
 1、高效检索
 
 分区下面，会进行分段操作，每个分段都会有对应的素引，这样就可以根据 offset二分查找定位到消息在哪一段，根据段的索引文件，定位具体的 mle ssage
 
-
+&nbsp;
 
 2、分区副本可用性(1 eader选举，zk来协调
 
@@ -582,9 +603,9 @@ JMX协议（可以用诸如jdk自带的jconsole来进行连接获取状态信息
 
 当宕机的 leader恢复，发现新的1eader中的数据和自己持有的数据不一致，此时宕机的1 eader会将自己的数据截断到宕机之前的hw位置，然后同步新1 eader的数据。宕机的1eader活过来也像 follower一样同步数据，来保证数据的一致性。
 
+&nbsp;
 
-
-56.相比较于传统消息队列，kafka的区别
+## 56.相比较于传统消息队列，kafka的区别
 
 1、分区性:存储不会受单一服务器存储空间的限制
 
@@ -594,8 +615,9 @@ JMX协议（可以用诸如jdk自带的jconsole来进行连接获取状态信息
 
 4、负载均衡性:分区内的一条消息，只会被消费组中的一个消费者消费，主题中的消息，会均衡的发送给消费者组中的所有消费者进行消费。
 
+&nbsp;
 
-57.消息丢失和消息重复
+## 57.消息丢失和消息重复
 
 同步:这个生产者写一条消息的时候，它就立马发送到某个分区去。
 
@@ -655,6 +677,49 @@ oa: 上下班打卡。
 > TPS 一般包含 QPS 
 
 &nbsp;
+
+## Kafka Rebalance 触发场景?
+
+> 触发场景： 
+>
+> 1、Partition 个数的增加
+>
+> 2、Topic 数的订阅者发生变化
+>
+> 3、`Consumer Group` 成员的加入或离开（这个是我们最常遇到
+
+&nbsp;
+
+## Kafka Rebalance 步骤？
+
+> Rebalance 步骤：
+>
+> - 第一步：所有 Consumer 成员都向 Coordinator 发送请求，请求入 Consumer Group 。一旦所有成员都发送了请求，Coordinator 会从中选择一个 Consumer 担任 Leader 的角色，并把 Group 成员信息以及订阅信息发给Leader。
+> - 第二步：Leader 开始分配消费方案，指明具体哪个 Consumer 负责消费哪些 Topic 的哪些 Partition。一旦完成分配，Leader 会将这个方案发给 `Coordinator`。`Coordinator` 接收到分配方案之后会把方案发给各个 Consumer，这样 Group 内的所有成员就都知道自己应该消费哪些 Partition 了。
+> - 所以对于 `Rebalance` 来说，`Coordinator` 起着至关重要的作用
+
+
+
+## 如何避免 Rebalance?
+
+业务需要不可避免
+
+- 针对分区个数的增加， 一般不会常有，是需要增加的时候都是业务及数据需求，不可避
+- 对 `Topic` 的订阅增加或取消亦不可避免
+
+&nbsp;
+
+合理设置消费者参数（下边是我们遇到的，要格外关注及重视）
+
+- 未能及时发送心跳而 Rebalance
+  - **session.timeout.ms** 一次session的连接超时时间
+  - **heartbeat.interval.ms** 心跳时间，一般为超时时间的1/3，Consumer在被判定为死亡之前，能够发送至少 3 轮的心跳请求
+
+- Consumer 消费超时而 Rebalance
+  - **max.poll.interval.ms**  每隔多长时间去拉取消息。合理设置预期值，尽量在间隔时间消费者处理完业务逻辑，否则就会被 coordinator 判定为死亡，踢出 Consumer Group，进行 Rebalance
+  - **max.poll.records**  一次从拉取出来的数据条数。根据消费业务处理耗费时长合理设置，如果每次max.poll.interval.ms  设置的时间较短，可以 max.poll.records 设置小点儿，少拉取些，这样不会超时。
+
+> 总之，尽可能在 `max.poll.interval.ms` 时间间隔内处理完 max.poll.records 条消息，让 Coordinator 检测到 Consumer Active 状态。
 
 
 
